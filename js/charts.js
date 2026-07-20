@@ -284,7 +284,7 @@ class ChartManager {
     chart.data.datasets[0].data = data.values;
     chart.update();
   }
-}
+
   // Enhanced chart features for Phase 4.3
   createComparisonChart() {
     const canvas = document.getElementById("comparisonChart");
@@ -488,3 +488,4 @@ class ChartManager {
 
     return { labels, datasets };
   }
+}

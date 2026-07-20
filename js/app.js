@@ -566,6 +566,8 @@ class AIProTracker {
     try {
       this.updateAPIStatus();
       console.log("⚙️ Settings view rendered");
+    } catch (error) {
+      console.error("Error rendering settings:", error);
     }
   }
 
