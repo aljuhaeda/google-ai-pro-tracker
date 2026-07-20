@@ -1,0 +1,65 @@
+// Phase 5.3: Chrome Extension Manifest
+{
+  "manifest_version": 3,
+  "name": "AI Pro Tracker Extension",
+  "version": "1.0.0",
+  "description": "Track your Google AI Pro usage across the web",
+  
+  "permissions": [
+    "storage",
+    "activeTab",
+    "background",
+    "notifications",
+    "webRequest"
+  ],
+  
+  "host_permissions": [
+    "https://*.google.com/*",
+    "https://*.openai.com/*",
+    "https://*.anthropic.com/*",
+    "https://gemini.google.com/*",
+    "https://bard.google.com/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gemini.google.com/*",
+        "https://bard.google.com/*",
+        "https://makersuite.google.com/*",
+        "https://ai.google.dev/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "AI Pro Tracker",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["tracker.js", "icons/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

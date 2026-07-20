@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4285f4">
+    <meta name="description" content="Track and maximize your Google AI Pro subscription usage with a beautiful and functional interface.">
+    <title>AI Pro Tracker</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/advanced.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="icons/icon-192x192.png" alt="AI Pro Tracker Logo">
+                <h1>AI Pro Tracker</h1>
+            </div>
+            <nav class="main-nav">
+                <button class="nav-item active" data-view="dashboard">
+                    <span class="icon">🏠</span>
+                    <span class="text">Dashboard</span>
+                </button>
+                <button class="nav-item" data-view="analytics">
+                    <span class="icon">📊</span>
+                    <span class="text">Analytics</span>
+                </button>
+                <button class="nav-item" data-view="goals">
+                    <span class="icon">🎯</span>
+                    <span class="text">Goals</span>
+                </button>
+                <button class="nav-item" data-view="settings">
+                    <span class="icon">⚙️</span>
+                    <span class="text">Settings</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <p>&copy; 2025 AI Pro Tracker</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h2 id="viewTitle">Dashboard</h2>
+                <div class="header-actions">
+                    <button class="btn-icon" id="notificationBell">🔔<span class="badge" id="notificationCount">0</span></button>
+                    <button class="btn-icon">👤</button>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Dashboard View -->
+                <section class="view active" id="dashboardView">
+                    <div class="dashboard-grid">
+                        <div class="card summary-card">
+                            <h3>Monthly Usage</h3>
+                            <p class="large-text" id="monthlyUsage">0%</p>
+                            <div class="progress-bar-container"><div class="progress-bar" id="monthlyProgress"></div></div>
+                        </div>
+                        <div class="card summary-card">
+                            <h3>Features Used</h3>
+                            <p class="large-text" id="featuresUsed">0/7</p>
+                            <div class="progress-bar-container"><div class="progress-bar" id="featuresProgress"></div></div>
+                        </div>
+                        <div class="card summary-card">
+                            <h3>Subscription Value</h3>
+                            <p class="large-text" id="subscriptionValue">$0</p>
+                            <p class="sub-text">Value Realized</p>
+                        </div>
+
+                        <div class="card full-width">
+                            <h3>Quick Actions</h3>
+                            <div class="quick-actions-grid">
+                                <button class="action-btn" data-feature="veo">🎬 Log Veo Video</button>
+                                <button class="action-btn" data-feature="imagen3">🎨 Log Imagen 3</button>
+                                <button class="action-btn" data-feature="musicAI">🎵 Log Music AI</button>
+                                <button class="action-btn" data-feature="geminiPro">💬 Log Gemini Pro</button>
+                            </div>
+                        </div>
+
+                        <!-- Phase 6: AI Intelligence Panel -->
+                        <div class="card full-width ai-intelligence-panel">
+                            <h3>🤖 AI Intelligence</h3>
+                            <div id="aiInsights" class="ai-insights-grid"></div>
+                            <div id="workflowSuggestions" class="workflow-suggestions-list"></div>
+                            <button class="btn primary" id="optimizeWorkflow">Optimize My Workflow</button>
+                        </div>
+
+                        <!-- Phase 6: Voice Interface -->
+                        <div class="card voice-interface-card">
+                            <h3>🎤 Voice Assistant</h3>
+                            <button class="btn secondary" id="voiceActivation">Ask AI Assistant</button>
+                            <p id="voiceStatus" class="status-text"></p>
+                            <p id="voiceTranscript" class="transcript-text"></p>
+                        </div>
+
+                        <!-- Phase 6: Multi-Platform Dashboard -->
+                        <div class="card multi-platform-card">
+                            <h3>🌐 Multi-Platform Analytics</h3>
+                            <div id="platformSelector" class="platform-selector"></div>
+                            <div id="unifiedAnalytics" class="unified-analytics-summary"></div>
+                        </div>
+
+                        <!-- Phase 6: AR/VR Interface -->
+                        <div class="card ar-vr-card">
+                            <h3>🥽 AR/VR Analytics</h3>
+                            <button class="btn primary" id="enterVR">Enter VR Analytics</button>
+                            <button class="btn secondary" id="enableAR">Enable AR Overlay</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analytics View -->
+                <section class="view" id="analyticsView">
+                    <div class="analytics-overview">
+                        <div class="card">
+                            <h3>Productivity Score</h3>
+                            <p class="large-text" id="productivityScore">0</p>
+                        </div>
+                        <div class="card full-width">
+                            <h3>Smart Insights</h3>
+                            <div id="insightsGrid" class="insights-grid"></div>
+                        </div>
+                        <div class="card full-width">
+                            <h3>Usage Trends</h3>
+                            <canvas id="usageTrendChart"></canvas>
+                        </div>
+                        <div class="card full-width">
+                            <h3>Feature Distribution</h3>
+                            <canvas id="featureDistributionChart"></canvas>
+                        </div>
+                        <div class="card full-width">
+                            <h3>Smart Recommendations</h3>
+                            <div id="recommendationsList" class="recommendations-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Goals View -->
+                <section class="view" id="goalsView">
+                    <div class="goals-header">
+                        <h2>Your Goals</h2>
+                        <button class="btn primary" id="addGoalBtn">➕ Add New Goal</button>
+                    </div>
+                    <div id="goalsGrid" class="goals-grid"></div>
+                    <div class="card full-width">
+                        <h3>Suggested Goals</h3>
+                        <div id="suggestionsGrid" class="suggestions-grid"></div>
+                    </div>
+                </section>
+
+                <!-- Settings View -->
+                <section class="view" id="settingsView">
+                    <div class="settings-grid">
+                        <div class="card">
+                            <h3>Notifications</h3>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="browserNotifications" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="toggle-label">Browser Notifications</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="quotaAlerts" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="toggle-label">Quota Alerts</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="smartReminders" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="toggle-label">Smart Reminders</span>
+                        </div>
+                        <div class="card">
+                            <h3>Analytics</h3>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="detailedAnalytics" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="toggle-label">Detailed Analytics</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="usageTracking" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="toggle-label">Usage Tracking</span>
+                        </div>
+                        <div class="card">
+                            <h3>API Integration</h3>
+                            <div class="api-status" id="apiStatus">
+                                <div class="status-indicator">
+                                    <span class="status-dot" id="apiStatusDot"></span>
+                                    <span class="status-text" id="apiStatusText">Checking...</span>
+                                </div>
+                                <button class="btn primary" id="connectAPI">Connect API</button>
+                                <button class="btn secondary" id="syncNow">Sync Now</button>
+                                <button class="btn danger" id="disconnectAPI">Disconnect</button>
+                            </div>
+                            <div class="api-info" id="apiInfo">
+                                <p>Last Sync: <span id="lastSyncTime">Never</span></p>
+                                <p>Real-time Tracking: <span id="realTimeStatus">Disabled</span></p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>Data Management</h3>
+                            <button class="btn primary" id="exportData">Export Data</button>
+                            <button class="btn danger" id="clearData">Clear All Data</button>
+                        </div>
+                        <!-- Enterprise Features (Admin Only) -->
+                        <div class="card full-width enterprise-features" id="enterpriseCard">
+                            <h3>🏢 Enterprise Features</h3>
+                            <div class="feature-grid">
+                                <button class="btn secondary" onclick="app.showTeamDashboard()">👥 Team Dashboard</button>
+                                <button class="btn secondary" onclick="app.showWorkspaceIntegration()">🔗 Workspace Integration</button>
+                                <button class="btn secondary" onclick="app.showEnterpriseDashboard()">📊 Enterprise Dashboard</button>
+                                <button class="btn secondary" onclick="app.installChromeExtension()">🌐 Chrome Extension</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Generic Modal for Forms/Details -->
+    <div class="modal-overlay" id="genericModal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="genericModalTitle"></h3>
+                <button class="modal-close" id="closeGenericModal">×</button>
+            </div>
+            <div class="modal-body" id="genericModalBody">
+                <!-- Content will be loaded here by JavaScript -->
+            </div>
+            <div class="modal-footer" id="genericModalFooter">
+                <!-- Buttons will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Script Includes (Order is important!) -->
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/insights.js"></script>
+    <script src="js/goals.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/pwa.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ml-analytics.js"></script>
+    <script src="js/pdf-reports.js"></script>
+    <script src="js/enhanced-charts.js"></script>
+    <script src="js/smart-notifications.js"></script>
+    <script src="js/utils/command-router.js"></script>
+    <script src="js/reminders.js"></script>
+    <script src="js/user-manager.js"></script>
+    <script src="js/team-dashboard.js"></script>
+    <script src="js/workspace-integration.js"></script>
+    <script src="js/enterprise-dashboard.js"></script>
+    <script src="js/phase6/ai-intelligence.js"></script>
+    <script src="js/phase6/context-analyzer.js"></script>
+    <script src="js/phase6/workflow-optimizer.js"></script>
+    <script src="js/phase6/voice-interface.js"></script>
+    <script src="js/phase6/ai-assistant.js"></script>
+    <script src="js/phase6/platform-adapter.js"></script>
+    <script src="js/phase6/cross-platform-analytics.js"></script>
+    <script src="js/phase6/ar-vr-interface.js"></script>
+    <script src="js/phase6/advanced-automation.js"></script>
+    <script src="js/models/behavior-learning.js"></script>
+    <script src="js/models/context-models.js"></script>
+    <script src="js/models/optimization-models.js"></script>
+    <script src="js/utils/nlp-processor.js"></script>
+    <script src="js/utils/speech-synthesis.js"></script>
+    <script src="js/utils/webxr-utils.js"></script>
+    <script src="js/app.js"></script> <!-- app.js must be last as it initializes everything -->
+</body>
+</html>
